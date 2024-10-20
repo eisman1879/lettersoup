@@ -1,4 +1,4 @@
-#ExampleProject
+# ExampleProject
 This is a school project
-##Description
+## Description
 blablalbalba
