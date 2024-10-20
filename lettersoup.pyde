@@ -2,7 +2,7 @@ import random  # To use random.choice and random.randint
 
 gridSize = 8  # Size of the grid
 grid = [['' for _ in range(gridSize)] for _ in range(gridSize)]  # 8x8 matrix
-words = ['CAT', 'DOG', 'SUN']  # The words to hide
+words = ['CAT', 'DOG', 'SUN' , 'MOON']  # The words to hide
 
 def setup():
     size(400, 400)  # Window size
