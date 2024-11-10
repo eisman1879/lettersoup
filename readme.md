@@ -1,4 +1,4 @@
-# Buchstabensuppe
+# Buchstabensalat
 Dies ist ein Projekt für das Modul Applikationen.
 ## Beschreibung
 Es entsteht ein einfaches Eingabemobul, dass dem Benutzenden erlaubt eigene Wörter in einer Wortsuppe zu verstecken. Der Output soll in einer herunterladbaren Bilddatei stattfinden.
