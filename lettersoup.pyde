@@ -106,7 +106,7 @@ def keyPressed():
         if input_field == "":
             return
         print("Entered:", input_field)
-        words.append(input_field.upper()) # Wörter grossgeschrieben hinzufügen
+        words.append(input_field.upper()) # Add words in capitals
         print(words)
         check_if_ready()
         input_field = ""
@@ -114,7 +114,7 @@ def keyPressed():
         if len(input_field) < 8 and key != " ":  # Only add character if word length is less than 8
             input_field += key
 
-# Wenn 3 wöter eingegeben wurden, wortsuppensalat generieren.
+# When 3 words are added, start lettersalad
 def check_if_ready():
     if len(words) >= 3:
         setup_lettersalad()
