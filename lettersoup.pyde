@@ -1,5 +1,7 @@
 import random  # To use random.choice and random.randint
 
+file_saved = False
+
 global screen
 screen = 0
 
@@ -70,6 +72,7 @@ def display_welcome():
     textAlign(CENTER, CENTER)
     fill(0)
     text('Welcome to Word Search', width/2, 50)
+
     
     # Display the dynamic message
     remaining_words = 3 - len(words)
@@ -79,6 +82,8 @@ def display_welcome():
     
     textSize(16)  # Smaller text size for the message
     text(message, width/2, 100)
+    textSize (12)
+    text('(You can save the result by pressing "s")', width/2, 120)
     textSize(24)  # Reset text size to default
 
 def display_input_field():
@@ -106,15 +111,18 @@ def keyPressed():
         if input_field == "":
             return
         print("Entered:", input_field)
-        words.append(input_field.upper()) # Add words in capitals
+        words.append(input_field.upper()) # Wörter grossgeschrieben hinzufügen
         print(words)
         check_if_ready()
         input_field = ""
     elif isinstance(key, unicode):
-        if len(input_field) < 8 and key != " ":  # Only add character if word length is less than 8
-            input_field += key
+        if screen == 0:
+            if len(input_field) < 8 and key != " ":  # Only add character if word length is less than 8
+                input_field += key
+        elif screen == 1 and key == 's' or key == 'S':
+            save_lettersalad()
 
-# When 3 words are added, start lettersalad
+# Wenn 3 wöter eingegeben wurden, wortsuppensalat generieren.
 def check_if_ready():
     if len(words) >= 3:
         setup_lettersalad()
@@ -126,16 +134,41 @@ def setup_lettersalad():
     fill_grid_with_random_letters()  # Step 2: Fill the remaining spaces with random letters
     screen = 1
 
+
 def display_grid():
     textAlign(CENTER, CENTER)
     fill(0)
     for i in range(gridSize):
         for j in range(gridSize):
             text(grid[i][j], j * 50 + 25, i * 50 + 25)  # Display letters in grid cells
-    save_grid_as_image()
+
+
+# Überprüft ob bereits ein Wortsuppensalatmüesli exisitiert und speichert den salat mit einer nummer
+def save_lettersalad():
+    global file_saved
     
-def save_grid_as_image():
-    # Save the current canvas as an image
-    save("output/grid_output.jpg")
-    print("Grid saved as 'grid_output.jpg' in the sketch folder")
-    exit()
+    # Check if the file has already been saved in this instance
+    if file_saved:
+        print("File already saved in this instance.")
+        return
+
+    base_name = "lettersalad"
+    extension = ".png"
+    path = "output"
+    counter = 1
+
+    # Ensure the output directory exists (sketchPath gives you the path of the project)
+    if not os.path.exists(sketchPath(path)):
+        os.makedirs(sketchPath(path))
+
+    while True:
+        file_name = "{}_{}{}".format(base_name, counter, extension)
+        full_path = os.path.join(path, file_name)
+        
+        if not os.path.exists(sketchPath(full_path)):
+            save(sketchPath(full_path))
+            print("Suppe gespeichert: {}".format(sketchPath(full_path)))
+            file_saved = True  # Mark that the file has been saved
+            break
+        
+        counter += 1
