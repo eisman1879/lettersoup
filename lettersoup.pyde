@@ -132,3 +132,10 @@ def display_grid():
     for i in range(gridSize):
         for j in range(gridSize):
             text(grid[i][j], j * 50 + 25, i * 50 + 25)  # Display letters in grid cells
+  save_grid_as_image()
+    
+def save_grid_as_image():
+    # Save the current canvas as an image
+    save("output/grid_output.jpg")
+    print("Grid saved as 'grid_output.jpg' in the sketch folder")
+    exit()
