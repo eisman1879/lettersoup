@@ -1,5 +1,5 @@
 import random  # To use random.choice and random.randint
-
+import os
 global screen
 screen = 0
 
